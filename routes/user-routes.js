@@ -4,9 +4,9 @@ const {createUser,getUser,getUserbyId,deleteUser,updateUser} = require('../contr
 
 // Routes
 router.post('/create-user', createUser);
-router.post('/get-user', getUser);
-router.post('/get-user/:id', getUserbyId);
-router.post('/delete-user/:id', deleteUser);
-router.post('/update-user/:id', updateUser);
+router.get('/get-user', getUser);
+router.get('/get-user/:id', getUserbyId);
+router.delete('/delete-user/:id', deleteUser);
+router.put('/update-user/:id', updateUser);
 
 module.exports = router;
