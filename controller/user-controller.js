@@ -1,4 +1,26 @@
 const User = require('../models/user-schema');
+const jwt = require('jsonwebtoken');
+
+
+const login = async (req, res) => {
+  // Find the user
+  console.log(req.body.email);
+  const user = await User.findOne({
+    email: req.body.email,
+  });
+
+  // Check if the user exists
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+  // Check if the password is correct
+  // Generate a token
+  const token = jwt.sign({ id: user._id }, 'Bajracharya');
+  // Send the token to the user
+  res.json({ token: token });
+  // Return the user
+  return user;
+}
 
 const createUser = async (req, res) => {  
     const user = new User({
@@ -53,4 +75,4 @@ const updateUser = async (req, res) => {
   } 
 }
   
-module.exports = {createUser, getUser, getUserbyId,deleteUser,updateUser};
+module.exports = {createUser, getUser, getUserbyId,deleteUser,updateUser,login};
